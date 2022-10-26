@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+
+  postgres:
+    image:  postgres:13
+    ports:
+      - 5422:5432
+
+    environment:
+      POSTGRES_DB: event-manager-db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 211001
+
+    restart: always
+
+    volumes:
+      - data:/var/lib/postgresql/data
+
+volumes:
+  data:
