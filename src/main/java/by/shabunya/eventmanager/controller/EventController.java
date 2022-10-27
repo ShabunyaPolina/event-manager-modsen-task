@@ -28,14 +28,14 @@ public class EventController {
     }
 
     @PostMapping("/events")
-    public Event saveEvent(@Valid @RequestBody Event event) {
-        return eventService.saveEvent(event);
+    public void saveEvent(@Valid @RequestBody Event event) {
+        eventService.saveEvent(event);
     }
 
     @PutMapping("/events/{id}")
-    public Event updateEvent(@RequestBody Event event,
+    public void updateEvent(@RequestBody Event event,
                              @PathVariable("id") Long eventId) {
-        return eventService.updateEvent(event, eventId);
+        eventService.updateEvent(event, eventId);
     }
 
     @DeleteMapping("/events/{id}")

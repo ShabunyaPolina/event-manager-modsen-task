@@ -2,9 +2,7 @@ package by.shabunya.eventmanager.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
@@ -12,16 +10,22 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table
 public class Event {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long eventId;
+
     @NonNull
     private String theme;
+
     private String description;
+
     private String organizer;
+
     @NonNull
     private Date time;
+
     @NonNull
     private String venue;
 }

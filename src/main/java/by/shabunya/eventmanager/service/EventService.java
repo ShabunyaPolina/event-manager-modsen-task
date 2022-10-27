@@ -9,9 +9,9 @@ public interface EventService {
 
     Event getEventById(Long eventId);
 
-    Event saveEvent(Event event);
+    void saveEvent(Event event);
 
-    Event updateEvent(Event event, Long eventId);
+    void updateEvent(Event event, Long eventId);
 
     void deleteEvent(Long eventId);
 }
