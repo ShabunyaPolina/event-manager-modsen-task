@@ -3,7 +3,6 @@ package by.shabunya.eventmanager.service.impl;
 import by.shabunya.eventmanager.dao.impl.EventDAO;
 import by.shabunya.eventmanager.entity.Event;
 import by.shabunya.eventmanager.service.EventService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +14,6 @@ public class EventServiceImpl implements EventService {
 
     private final EventDAO eventDAO;
 
-    @Autowired
     public EventServiceImpl(EventDAO eventDAO) {
         this.eventDAO = eventDAO;
     }

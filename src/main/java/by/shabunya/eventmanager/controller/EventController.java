@@ -2,6 +2,8 @@ package by.shabunya.eventmanager.controller;
 
 import by.shabunya.eventmanager.entity.Event;
 import by.shabunya.eventmanager.service.EventService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -28,17 +30,20 @@ public class EventController {
     }
 
     @PostMapping("/events")
+    @ResponseStatus(value = HttpStatus.OK)
     public void saveEvent(@Valid @RequestBody Event event) {
         eventService.saveEvent(event);
     }
 
     @PutMapping("/events/{id}")
+    @ResponseStatus(value = HttpStatus.OK)
     public void updateEvent(@RequestBody Event event,
                              @PathVariable("id") Long eventId) {
         eventService.updateEvent(event, eventId);
     }
 
     @DeleteMapping("/events/{id}")
+    @ResponseStatus(value = HttpStatus.OK)
     public void deleteEvent(@PathVariable("id") Long eventId) {
         eventService.deleteEvent(eventId);
     }
