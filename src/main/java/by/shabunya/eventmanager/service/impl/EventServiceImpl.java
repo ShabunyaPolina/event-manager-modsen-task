@@ -1,6 +1,6 @@
 package by.shabunya.eventmanager.service.impl;
 
-import by.shabunya.eventmanager.dao.EventDAO;
+import by.shabunya.eventmanager.dao.impl.EventDAO;
 import by.shabunya.eventmanager.entity.Event;
 import by.shabunya.eventmanager.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<Event> getEventList() {
-        return eventDAO.get();
+        return eventDAO.getAll();
     }
 
     @Override
