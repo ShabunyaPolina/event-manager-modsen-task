@@ -5,7 +5,7 @@ import by.shabunya.eventmanager.entity.Event;
 import java.util.List;
 
 public interface EventService {
-    List<Event> getEventList();
+    List<Event> getEventList(String theme, String organizer, String time);
 
     Event getEventById(Long eventId);
 

@@ -20,8 +20,11 @@ public class EventController {
     }
 
     @GetMapping("/events")
-    public List<Event> getEventList() {
-        return eventService.getEventList();
+    public List<Event> getEventList(
+            @RequestParam(value = "theme", required = false) String theme,
+            @RequestParam(value = "organizer", required = false) String organizer,
+            @RequestParam(value = "time", required = false) String time) {
+        return eventService.getEventList(theme, organizer, time);
     }
 
     @GetMapping("/events/{id}")
@@ -38,7 +41,7 @@ public class EventController {
     @PutMapping("/events/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public void updateEvent(@RequestBody Event event,
-                             @PathVariable("id") Long eventId) {
+                            @PathVariable("id") Long eventId) {
         eventService.updateEvent(event, eventId);
     }
 

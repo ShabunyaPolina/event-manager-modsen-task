@@ -7,11 +7,11 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import java.sql.Date;
 import java.util.List;
 
 @Repository
 public class EventDAO implements GenericDAO<Event> {
-
     private final EntityManager entityManager;
 
     public EventDAO(EntityManager entityManager) {
@@ -63,5 +63,21 @@ public class EventDAO implements GenericDAO<Event> {
             throw new EventNotFoundException("No event with id " + id, id);
 
         session.delete(eventToDelete);
+    }
+
+    public List<Event> getAll(String theme, String organizer, String time) {
+        if (theme == null && organizer == null && time == null)
+            return getAll();
+
+        String query = "SELECT e FROM Event e WHERE " +
+                "(:eventTheme IS NULL OR e.theme = :eventTheme) " +
+                "AND (:eventOrganizer IS NULL OR e.organizer = :eventOrganizer) " +
+                "AND (cast(:eventTime AS date) IS NULL OR e.time = :eventTime)";
+
+        return entityManager.createQuery(query, Event.class)
+                .setParameter("eventTheme", theme)
+                .setParameter("eventOrganizer", organizer)
+                .setParameter("eventTime", time == null ? null : Date.valueOf(time))
+                .getResultList();
     }
 }

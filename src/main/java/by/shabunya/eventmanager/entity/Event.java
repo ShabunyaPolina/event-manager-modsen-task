@@ -22,10 +22,12 @@ public class Event implements Serializable {
     @Column(name = "theme", nullable = false)
     private String theme;
 
-    @Column(name = "description")
+    @NonNull
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "organizer")
+    @NonNull
+    @Column(name = "organizer", nullable = false)
     private String organizer;
 
     @NonNull

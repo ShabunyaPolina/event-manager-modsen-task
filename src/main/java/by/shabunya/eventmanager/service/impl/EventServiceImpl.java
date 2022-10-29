@@ -19,8 +19,8 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> getEventList() {
-        return eventDAO.getAll();
+    public List<Event> getEventList(String theme, String organizer, String time) {
+        return eventDAO.getAll(theme, organizer, time);
     }
 
     @Override
