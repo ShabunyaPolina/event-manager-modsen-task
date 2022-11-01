@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <changeSet author="popo" id="create-event-table">
+        <sql endDelimiter=";"
+             splitStatements="true">
+            CREATE TABLE event
+            (
+                event_id    BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+                theme       TEXT NOT NULL,
+                description TEXT NOT NULL,
+                organizer   TEXT NOT NULL,
+                date        DATE NOT NULL,
+                time        TIME NOT NULL,
+                venue       TEXT NOT NULL
+            );
+        </sql>
+        <rollback>
+            DROP TABLE event;
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

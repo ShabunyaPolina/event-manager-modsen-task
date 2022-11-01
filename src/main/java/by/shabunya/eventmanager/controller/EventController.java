@@ -23,8 +23,9 @@ public class EventController {
     public List<Event> getEventList(
             @RequestParam(value = "theme", required = false) String theme,
             @RequestParam(value = "organizer", required = false) String organizer,
+            @RequestParam(value = "date", required = false) String date,
             @RequestParam(value = "time", required = false) String time) {
-        return eventService.getEventList(theme, organizer, time);
+        return eventService.getEventList(theme, organizer, date, time);
     }
 
     @GetMapping("/events/{id}")

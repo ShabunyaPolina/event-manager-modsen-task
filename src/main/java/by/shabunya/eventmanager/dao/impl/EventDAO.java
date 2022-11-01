@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 @Repository
@@ -65,19 +66,21 @@ public class EventDAO implements GenericDAO<Event> {
         session.delete(eventToDelete);
     }
 
-    public List<Event> getAll(String theme, String organizer, String time) {
-        if (theme == null && organizer == null && time == null)
+    public List<Event> getAll(String theme, String organizer, String date, String time) {
+        if (theme == null && organizer == null && date == null && time == null)
             return getAll();
 
         String query = "SELECT e FROM Event e WHERE " +
                 "(:eventTheme IS NULL OR e.theme = :eventTheme) " +
                 "AND (:eventOrganizer IS NULL OR e.organizer = :eventOrganizer) " +
-                "AND (cast(:eventTime AS date) IS NULL OR e.time = :eventTime)";
+                "AND (cast(:eventDate AS date) IS NULL OR e.date = :eventDate)" +
+                "AND (cast(:eventTime AS time) IS NULL OR e.time = :eventTime)";
 
         return entityManager.createQuery(query, Event.class)
                 .setParameter("eventTheme", theme)
                 .setParameter("eventOrganizer", organizer)
-                .setParameter("eventTime", time == null ? null : Date.valueOf(time))
+                .setParameter("eventDate", date == null ? null : Date.valueOf(date))
+                .setParameter("eventTime", time == null ? null : Time.valueOf(time))
                 .getResultList();
     }
 }

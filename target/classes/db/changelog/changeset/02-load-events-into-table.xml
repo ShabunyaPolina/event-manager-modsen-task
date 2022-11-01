@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <changeSet author="popo" id="load-events-into-table">
+        <loadData encoding="UTF-8"
+                  tableName="event"
+                  file="db/changelog/changeset/events.csv"
+                  separator=","
+                  usePreparedStatements="true">
+            <column name="event_id" type="NUMERIC"/>
+            <column name="theme" type="STRING"/>
+            <column name="description" type="STRING"/>
+            <column name="organizer" type="STRING"/>
+            <column name="date" type="DATETIME"/>
+            <column name="time" type="DATETIME"/>
+            <column name="venue" type="STRING"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>
