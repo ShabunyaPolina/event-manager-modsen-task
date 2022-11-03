@@ -3,7 +3,6 @@ package by.shabunya.eventmanager.controller;
 import by.shabunya.eventmanager.entity.Event;
 import by.shabunya.eventmanager.service.EventService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

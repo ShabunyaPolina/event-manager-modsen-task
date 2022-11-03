@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
@@ -77,22 +78,20 @@ public class EventDAO implements GenericDAO<Event> {
                 "AND (cast(:eventDate AS date) IS NULL OR e.date = :eventDate)" +
                 "AND (cast(:eventTime AS time) IS NULL OR e.time = :eventTime)";
 
-        Function<String, Date> strToDate = Date::valueOf;
-        Function<String, Time> strToTime = Time::valueOf;
+        Date eventDate;
+        Time eventTime;
+        try {
+            eventDate = date == null ? null : Date.valueOf(date);
+            eventTime = time == null ? null : Time.valueOf(time);
+        } catch (IllegalArgumentException e) {
+            return Collections.emptyList();
+        }
 
         return entityManager.createQuery(query, Event.class)
                 .setParameter("eventTheme", theme)
                 .setParameter("eventOrganizer", organizer)
-                .setParameter("eventDate", convertString(strToDate, date))
-                .setParameter("eventTime", convertString(strToTime, time))
+                .setParameter("eventDate", eventDate)
+                .setParameter("eventTime", eventTime)
                 .getResultList();
-    }
-
-    private <R> R convertString(Function<String, R> f, String value) {
-        try {
-            return value == null ? null : f.apply(value);
-        } catch (IllegalArgumentException e) {
-            return null;
-        }
     }
 }
