@@ -1,29 +1,17 @@
-version: '3.1'
+version: '3.7'
 
 services:
-  app:
-    image: 'docker-spring-boot-postgres:latest'
-    ports:
-      - "8080:8080"
-    build:
-      context: .
-    container_name: app
-    depends_on:
-      - db
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=211001
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
   db:
     image: 'postgres:13'
     ports:
-      - "5432:5432"
-    container_name: db
+      - "5422:5432"
+    container_name: event-manager-db
+
     environment:
-      - POSTGRES_DB=compose-postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=211001
+      POSTGRES_DB: event-manager-db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 211001
+
     volumes:
       - ./log-directory:/var/lib/postgresql/data

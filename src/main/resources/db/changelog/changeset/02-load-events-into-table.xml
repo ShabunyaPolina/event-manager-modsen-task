@@ -6,7 +6,7 @@
     <changeSet author="popo" id="load-events-into-table">
         <loadData encoding="UTF-8"
                   tableName="event"
-                  file="db/changelog/changeset/events.csv"
+                  file="db/changelog/changeset/examples/events.csv"
                   separator=","
                   usePreparedStatements="true">
             <column name="event_id" type="NUMERIC"/>
