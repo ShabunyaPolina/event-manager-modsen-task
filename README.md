@@ -32,7 +32,7 @@ The app will start running at http://localhost:8080.
 To filter events by **theme**, **organizer**, **date** and **time**
 add corresponding parameters to `/events` route of GET request.
 Examples of parameters usage are:
-```bash
-GET /events?theme=Halloween&date=2022-10-31
-GET /events?organizer=Someone&date=2022-12-23time=15:00:00
-```
+
+    GET /events?theme=Halloween&date=2022-10-31  
+    GET /events?organizer=Someone&date=2022-12-23time=15:00:00
+
