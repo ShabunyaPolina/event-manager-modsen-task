@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
+import java.util.function.Function;
 
 @Repository
 public class EventDAO implements GenericDAO<Event> {
@@ -76,11 +77,22 @@ public class EventDAO implements GenericDAO<Event> {
                 "AND (cast(:eventDate AS date) IS NULL OR e.date = :eventDate)" +
                 "AND (cast(:eventTime AS time) IS NULL OR e.time = :eventTime)";
 
+        Function<String, Date> strToDate = Date::valueOf;
+        Function<String, Time> strToTime = Time::valueOf;
+
         return entityManager.createQuery(query, Event.class)
                 .setParameter("eventTheme", theme)
                 .setParameter("eventOrganizer", organizer)
-                .setParameter("eventDate", date == null ? null : Date.valueOf(date))
-                .setParameter("eventTime", time == null ? null : Time.valueOf(time))
+                .setParameter("eventDate", convertString(strToDate, date))
+                .setParameter("eventTime", convertString(strToTime, time))
                 .getResultList();
+    }
+
+    private <R> R convertString(Function<String, R> f, String value) {
+        try {
+            return value == null ? null : f.apply(value);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 }
